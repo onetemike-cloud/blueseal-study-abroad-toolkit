@@ -286,6 +286,7 @@ a { color: inherit; text-decoration: none; }
 
 .section-body.on-navy { color: #cfd9ec; }
 .section-body.strong { font-weight: 700; color: var(--white); }
+.section-body.strong-body { font-weight: 700; color: var(--navy-800); }
 
 .section-body.center { margin-left: auto; margin-right: auto; }
 .narrow-body { max-width: 56ch; }
@@ -322,23 +323,182 @@ a { color: inherit; text-decoration: none; }
   color: var(--white);
 }
 
-/* ---------- Stage chips (what/why/when/how/next) ---------- */
-.stage-chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin: 24px 0 28px;
+/* ---------- Six-stage mechanism ---------- */
+.mechanism-steps {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+  margin: 32px 0 24px;
+  text-align: left;
 }
 
-.stage-chip {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+@media (min-width: 640px) {
+  .mechanism-steps { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 960px) {
+  .mechanism-steps { grid-template-columns: repeat(3, 1fr); }
+}
+
+.mechanism-step {
+  background: var(--off-white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.mechanism-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cyan-500);
   color: var(--white);
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.mechanism-step h3 {
+  margin: 0 0 6px;
+  color: var(--navy-900);
+  font-size: 1.05rem;
+}
+
+.mechanism-step p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.mechanism-tagline {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--navy-800);
+  margin: 8px 0 0;
+}
+
+.mechanism-tagline.on-navy-tagline {
+  color: var(--gold-500);
+}
+
+/* ---------- Visual proof grid ---------- */
+.proof-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  margin-top: 32px;
+}
+
+@media (min-width: 640px) {
+  .proof-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 960px) {
+  .proof-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.proof-card {
+  margin: 0;
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.proof-card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.proof-card figcaption {
+  padding: 14px 16px;
   font-weight: 700;
-  font-size: 0.88rem;
-  padding: 10px 18px;
-  border-radius: 999px;
+  font-size: 0.92rem;
+  color: var(--navy-800);
+  text-align: center;
+}
+
+/* ---------- Steps list (what happens after purchase) ---------- */
+.steps-list {
+  counter-reset: step;
+  list-style: none;
+  margin: 24px 0;
+  padding: 0;
+  text-align: left;
+  display: grid;
+  gap: 14px;
+}
+
+.steps-list li {
+  position: relative;
+  padding-left: 44px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.steps-list li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--navy-800);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- FAQ ---------- */
+.faq-list {
+  margin-top: 28px;
+  display: grid;
+  gap: 12px;
+}
+
+.faq-item {
+  background: var(--off-white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 6px 20px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--navy-900);
+  padding: 14px 0;
+  list-style: none;
+  position: relative;
+  padding-right: 28px;
+}
+
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 12px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--cyan-500);
+}
+
+.faq-item[open] summary::after { content: "\2212"; }
+
+.faq-item p {
+  margin: 0 0 16px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
 }
 
 /* ---------- Checklist ---------- */
@@ -426,65 +586,6 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.96rem;
 }
 
-/* ---------- Document grid ---------- */
-.doc-grid {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 1fr;
-  margin-top: 32px;
-}
-
-@media (min-width: 640px) {
-  .doc-grid { grid-template-columns: 1fr 1fr; }
-}
-
-.doc-card {
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  box-shadow: var(--shadow-md);
-}
-
-.doc-card h3 {
-  margin: 0 0 12px;
-  font-size: 1.05rem;
-  color: var(--navy-900);
-}
-
-.doc-card ul {
-  margin: 0;
-  padding-left: 20px;
-  color: var(--ink-soft);
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-
-.doc-card ul li { margin-bottom: 6px; }
-.doc-card ul li:last-child { margin-bottom: 0; }
-
-@media (min-width: 640px) {
-  .doc-card-wide {
-    grid-column: 1 / -1;
-  }
-  .doc-card-wide ul {
-    columns: 2;
-    column-gap: 32px;
-  }
-  .doc-card-wide ul li {
-    break-inside: avoid;
-  }
-}
-
-.doc-note {
-  margin: 28px auto 0;
-  max-width: 68ch;
-  text-align: center;
-  font-size: 0.9rem;
-  font-style: italic;
-  color: var(--ink-soft);
-}
-
 /* ---------- Country grid ---------- */
 .country-grid {
   display: grid;
@@ -521,44 +622,6 @@ a { color: inherit; text-decoration: none; }
   margin: 0;
   color: var(--ink-soft);
   font-size: 0.92rem;
-}
-
-/* ---------- Two path ---------- */
-.two-path {
-  display: grid;
-  gap: 16px;
-  align-items: center;
-  margin: 28px 0;
-}
-
-@media (min-width: 640px) {
-  .two-path { grid-template-columns: 1fr auto 1fr; }
-}
-
-.path-card {
-  background: var(--off-white);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  padding: 22px;
-  text-align: left;
-}
-
-.path-card h3 {
-  margin: 0 0 8px;
-  color: var(--navy-900);
-  font-size: 1.05rem;
-}
-
-.path-card p {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.94rem;
-}
-
-.path-divider {
-  font-weight: 800;
-  color: var(--cyan-500);
-  text-align: center;
 }
 
 /* ---------- Audience grid ---------- */
@@ -604,19 +667,6 @@ a { color: inherit; text-decoration: none; }
 
 .price-row-main { border-bottom: none; }
 
-.price-label {
-  font-weight: 600;
-  color: #cfd9ec;
-  font-size: 0.95rem;
-}
-
-.price-old-lg {
-  font-size: 1.3rem;
-  text-decoration: line-through;
-  color: #94a3c2;
-  font-weight: 700;
-}
-
 .price-new-lg {
   font-size: 2.6rem;
   font-weight: 900;
@@ -631,26 +681,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 .price-tags-center { justify-content: center; }
-
-.tag {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-weight: 800;
-  font-size: 0.85rem;
-}
-
-.tag-gold { background: var(--gold-500); color: var(--navy-900); }
-.tag-cyan { background: var(--cyan-400); color: var(--navy-900); }
-
-.price-deadline {
-  color: #cfd9ec;
-  font-size: 0.92rem;
-  margin: 0 0 22px;
-  line-height: 1.5;
-}
-
-.price-deadline.on-navy { color: #cfd9ec; }
 
 .price-fineprint {
   text-align: center;
